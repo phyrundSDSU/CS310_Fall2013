@@ -8,7 +8,7 @@ public class Driver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		MazeGrid test = new MazeGrid(null,30);
+		MazeGrid test = new MazeGrid(null,35);
 
 	}
 
