@@ -9,9 +9,16 @@ import data_structures.*;
 
 public class MazeSolver {
 	
-	public MazeSolver(){}
+	private MazeGrid grid;
+
 	
-	public void mark(){}
+	public MazeSolver( int dim){
+		grid = new MazeGrid(this, dim);
+	}
+	
+	public void mark(){
+		grid.markDistance(null);
+	}
 	
 	public boolean move(){
 		
@@ -19,6 +26,14 @@ public class MazeSolver {
 	}
 	
 	public void reset(){
+		
+	}
+	
+	//Beginning Main method inside MazeSolver class
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		new MazeSolver(25);
 		
 	}
 	
