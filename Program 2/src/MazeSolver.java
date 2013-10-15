@@ -5,19 +5,25 @@
 */  
 
 
+import javax.swing.JOptionPane;
+
 import data_structures.*;
 
 public class MazeSolver {
 	
 	private MazeGrid grid;
+	private Stack<GridCell> distance = new Stack<GridCell>();
 
 	
-	public MazeSolver( int dim){
+	public MazeSolver(int dim){
 		grid = new MazeGrid(this, dim);
 	}
 	
 	public void mark(){
-		grid.markDistance(null);
+		//distance.push(50,20);
+		System.out.print("Mark button was pressed");
+		 
+		 
 	}
 	
 	public boolean move(){
@@ -27,13 +33,15 @@ public class MazeSolver {
 	
 	public void reset(){
 		
+		// Add makeEmpty() functions for Stack and Queues
+		System.out.print("Reset button was pressed");
 	}
 	
 	//Beginning Main method inside MazeSolver class
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		new MazeSolver(25);
+		new MazeSolver(20);
 		
 	}
 	
