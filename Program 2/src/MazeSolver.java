@@ -19,21 +19,48 @@ public class MazeSolver {
 	
 	public MazeSolver(int dim){
 		grid = new MazeGrid(this, dim);
+		
 	}
 	
 	public void mark(){
 		
-		grid.markDistance(grid.getCell(10,2));
+		//grid.markDistance(grid.getCell(10,2));
 
 		//System.out.print(grid.getCell(5, 1));
-		 
-		 
+		
+		/*enqueue cell(0,0)
+		while( the queue is not empty ) {
+		    dequeue a GridCell from the queue.
+		    mark each adjacent neighboring cell and enqueue it
+		    }
+		 */
+		queuCell.enqueue(grid.getCell(0, 0));
+		int i = 0;
+		while(!queuCell.isEmpty())
+		{
+			GridCell cell = queuCell.dequeue();
+			GridCell acell = grid.getCell(cell.getX()+1, cell.getY());
+			acell.setDistance(i++);
+			grid.markDistance(acell);
+			queuCell.enqueue(acell);
+			//grid.getSize();
+		}
 	}
 	
 	public boolean move(){
 		
-		queuCell.enqueue(null);
+		//queuCell.enqueue(null);
 		//grid.isValidMove(null);
+		/*distance = terminal_cell.getDistance();
+		if(distance == -1) return false;  // unreachable, puzzle has no solution
+		push terminal cell onto the stack
+		while(distance != 0) {
+		    get distance from each cell adjacent to the top of the stack
+		    select the cell with smallest distance and push on the stack
+		    }
+		while( stack is not empty ) {
+		    pop grid cell off the stack and mark it
+		    }*/
 		return false;
 	}
 	
