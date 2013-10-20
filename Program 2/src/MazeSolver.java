@@ -23,9 +23,9 @@ public class MazeSolver {
 	
 	public void mark(){
 		
-		//grid.markDistance();
+		grid.markDistance(grid.getCell(10,2));
 
-		System.out.print("Mark button was pressed");
+		//System.out.print(grid.getCell(5, 1));
 		 
 		 
 	}
