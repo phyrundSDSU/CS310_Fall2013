@@ -37,7 +37,6 @@ public class MazeSolver {
 		
 
 		queuCell.enqueue(grid.getCell(0, 0));
-		int i = 0;
 
 		while(!queuCell.isEmpty())
 		{
@@ -45,36 +44,49 @@ public class MazeSolver {
 			int cRow = cell.getX();
 			int cCol = cell.getY();
 			GridCell temp;
+			
 			//top
 			if(grid.isValidMove(grid.getCell(cRow-1,cCol))){
 				temp=grid.getCell(cRow-1,cCol);
-				temp.setDistance(1);
-				queuCell.enqueue(temp);
-				grid.markDistance(temp);
+				
+				
+				if(!temp.wasVisited()){
+					temp.setDistance(1);	
+					queuCell.enqueue(temp);
+					grid.markDistance(temp);
+				}
 			}
 			//down
-			if(grid.isValidMove(grid.getCell(cRow+1,cCol))){
+			if( grid.isValidMove(grid.getCell(cRow+1,cCol))){
 				temp=grid.getCell(cRow+1,cCol);
+				
+				if(!temp.wasVisited()){
 				temp.setDistance(1);
 				queuCell.enqueue(temp);
 				grid.markDistance(temp);
+				}
 			}
 			//left
 			if(grid.isValidMove(grid.getCell(cRow,cCol-1))){
 				temp=grid.getCell(cRow,cCol-1);
+				
+				if(!temp.wasVisited()){
 				temp.setDistance(1);
 				queuCell.enqueue(temp);
 				grid.markDistance(temp);
+				}
 			}
 			//right
-			if(grid.isValidMove(grid.getCell(cRow,cCol+1))){
+			if( grid.isValidMove(grid.getCell(cRow,cCol+1))){
 				temp=grid.getCell(cRow,cCol+1);
+				
+				if(!temp.wasVisited()){
 				temp.setDistance(1);
 				queuCell.enqueue(temp);
 				grid.markDistance(temp);
 			}
-			
-			//grid.getSize();
+			}
+
 		}
 	}
 	
