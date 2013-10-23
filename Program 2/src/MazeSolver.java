@@ -34,15 +34,46 @@ public class MazeSolver {
 		    mark each adjacent neighboring cell and enqueue it
 		    }
 		 */
+		
+
 		queuCell.enqueue(grid.getCell(0, 0));
 		int i = 0;
+
 		while(!queuCell.isEmpty())
 		{
 			GridCell cell = queuCell.dequeue();
-			GridCell acell = grid.getCell(cell.getX()+1, cell.getY());
-			acell.setDistance(i++);
-			grid.markDistance(acell);
-			queuCell.enqueue(acell);
+			int cRow = cell.getX();
+			int cCol = cell.getY();
+			GridCell temp;
+			//top
+			if(grid.isValidMove(grid.getCell(cRow-1,cCol))){
+				temp=grid.getCell(cRow-1,cCol);
+				temp.setDistance(1);
+				queuCell.enqueue(temp);
+				grid.markDistance(temp);
+			}
+			//down
+			if(grid.isValidMove(grid.getCell(cRow+1,cCol))){
+				temp=grid.getCell(cRow+1,cCol);
+				temp.setDistance(1);
+				queuCell.enqueue(temp);
+				grid.markDistance(temp);
+			}
+			//left
+			if(grid.isValidMove(grid.getCell(cRow,cCol-1))){
+				temp=grid.getCell(cRow,cCol-1);
+				temp.setDistance(1);
+				queuCell.enqueue(temp);
+				grid.markDistance(temp);
+			}
+			//right
+			if(grid.isValidMove(grid.getCell(cRow,cCol+1))){
+				temp=grid.getCell(cRow,cCol+1);
+				temp.setDistance(1);
+				queuCell.enqueue(temp);
+				grid.markDistance(temp);
+			}
+			
 			//grid.getSize();
 		}
 	}
