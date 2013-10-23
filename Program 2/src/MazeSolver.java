@@ -6,8 +6,8 @@
 
 
 import javax.swing.JOptionPane;
-
 import data_structures.*;
+
 
 public class MazeSolver {
 	
@@ -23,11 +23,7 @@ public class MazeSolver {
 	}
 	
 	public void mark(){
-		
-		//grid.markDistance(grid.getCell(10,2));
-
-		//System.out.print(grid.getCell(5, 1));
-		
+				
 		/*enqueue cell(0,0)
 		while( the queue is not empty ) {
 		    dequeue a GridCell from the queue.
@@ -35,7 +31,7 @@ public class MazeSolver {
 		    }
 		 */
 		
-
+		grid.getCell(0, 0).setDistance(0);
 		queuCell.enqueue(grid.getCell(0, 0));
 
 		while(!queuCell.isEmpty())
@@ -43,15 +39,15 @@ public class MazeSolver {
 			GridCell cell = queuCell.dequeue();
 			int cRow = cell.getX();
 			int cCol = cell.getY();
+		
 			GridCell temp;
 			
 			//top
 			if(grid.isValidMove(grid.getCell(cRow-1,cCol))){
 				temp=grid.getCell(cRow-1,cCol);
-				
-				
+					
 				if(!temp.wasVisited()){
-					temp.setDistance(1);	
+					temp.setDistance(1+cell.getDistance());	
 					queuCell.enqueue(temp);
 					grid.markDistance(temp);
 				}
@@ -61,7 +57,7 @@ public class MazeSolver {
 				temp=grid.getCell(cRow+1,cCol);
 				
 				if(!temp.wasVisited()){
-				temp.setDistance(1);
+				temp.setDistance(1+cell.getDistance());
 				queuCell.enqueue(temp);
 				grid.markDistance(temp);
 				}
@@ -71,7 +67,7 @@ public class MazeSolver {
 				temp=grid.getCell(cRow,cCol-1);
 				
 				if(!temp.wasVisited()){
-				temp.setDistance(1);
+				temp.setDistance(1+cell.getDistance());
 				queuCell.enqueue(temp);
 				grid.markDistance(temp);
 				}
@@ -81,7 +77,7 @@ public class MazeSolver {
 				temp=grid.getCell(cRow,cCol+1);
 				
 				if(!temp.wasVisited()){
-				temp.setDistance(1);
+				temp.setDistance(1+cell.getDistance());
 				queuCell.enqueue(temp);
 				grid.markDistance(temp);
 			}
@@ -92,8 +88,7 @@ public class MazeSolver {
 	
 	public boolean move(){
 		
-		//queuCell.enqueue(null);
-		//grid.isValidMove(null);
+
 		/*distance = terminal_cell.getDistance();
 		if(distance == -1) return false;  // unreachable, puzzle has no solution
 		push terminal cell onto the stack
