@@ -10,7 +10,7 @@ import data_structures.*;
 
 
 public class MazeSolver {
-	
+	private final int DIMENSION;
 	private MazeGrid grid;
 	private int distance;
 	private Queue<GridCell> queuCell = new Queue<GridCell>();
@@ -19,6 +19,7 @@ public class MazeSolver {
 
 	
 	public MazeSolver(int dim){
+		DIMENSION = dim;
 		grid = new MazeGrid(this, dim);
 		
 	}
@@ -89,8 +90,8 @@ public class MazeSolver {
 	
 	public boolean move(){
 		
-		int cRow=19;
-		int cCol=19;
+		int cRow=DIMENSION-1;
+		int cCol=DIMENSION-1;
 		
 		GridCell workcell = grid.getCell(cRow,cCol);
 		distance = workcell.getDistance();
