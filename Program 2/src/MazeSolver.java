@@ -104,11 +104,9 @@ public class MazeSolver {
 		
 		while(distance!=0)
 		{
-			
 			GridCell temp=null;
 			workingDistance = Integer.MAX_VALUE;
 			GridCell workingCell = stackCell.iterator().next();
-			stackCell.pop();
 			
 			cRow = workingCell.getX();
 			cCol = workingCell.getY();
@@ -120,8 +118,6 @@ public class MazeSolver {
 				if(temp.wasVisited()){
 					workingCell = temp;
 					workingDistance = temp.getDistance();
-					stackCell.push(workingCell);
-					//temp.setDistance(-1);
 				}
 			}
 			//down
@@ -130,12 +126,10 @@ public class MazeSolver {
 				
 				if(temp.wasVisited() && workingCell!=null){
 					workingCell = temp.getDistance()<=workingDistance?temp:workingCell;
-					stackCell.push(workingCell);
 				}else{
 					workingCell = temp;
 				}
 				workingDistance = workingCell.getDistance()==-1?workingDistance:workingCell.getDistance();
-				//workingCell.setDistance(-1);
 			}
 			//left
 			if(grid.isValidMove(grid.getCell(cRow,cCol-1))){
@@ -143,13 +137,10 @@ public class MazeSolver {
 				
 				if(temp.wasVisited() && workingCell!=null){
 					workingCell = temp.getDistance()<=workingDistance?temp:workingCell;
-					stackCell.push(workingCell);
 				}else{
 					workingCell = temp;
 				}
 				workingDistance = workingCell.getDistance()==-1?workingDistance:workingCell.getDistance();
-
-				//workingCell.setDistance(-1);
 			}
 			//right
 			if( grid.isValidMove(grid.getCell(cRow,cCol+1))){
@@ -157,15 +148,13 @@ public class MazeSolver {
 				
 				if(temp.wasVisited() && workingCell!=null){
 					workingCell = temp.getDistance()<=workingDistance?temp:workingCell;
-					stackCell.push(workingCell);
 				}else{
 					workingCell = temp;
 				}
-				workingDistance = workingCell.getDistance()==-1?workingDistance:workingCell.getDistance();
-				//workingCell.setDistance(-1);
-				
+				workingDistance = workingCell.getDistance()==-1?workingDistance:workingCell.getDistance();				
 			}
-			distance = workingDistance;
+			
+			distance = workingDistance; //need to check if workingCell is Unset/Unvisited cell
 			if(distance!=-1)
 				stackCell.push(workingCell);
 		}
@@ -175,8 +164,6 @@ public class MazeSolver {
 			GridCell tmpCell = stackCell.peek();
 			grid.markMove(tmpCell);
 			stackCell.pop();
-			
-
 		}
 		/*distance = terminal_cell.getDistance();
 		if(distance == -1) return false;  // unreachable, puzzle has no solution

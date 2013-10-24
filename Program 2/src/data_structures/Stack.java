@@ -13,7 +13,7 @@ public class Stack<E> implements Iterable<E> {
 	}
 	
 	public void pop(){
-		list.removeLast();
+		list.removeFirst();
 	}
 	
 	// returns the number of elements currently in the stack
@@ -28,7 +28,7 @@ public class Stack<E> implements Iterable<E> {
     
     // returns but does not remove the element on the top of the stack    
     public E peek() {
-    	return list.peekLast();
+    	return list.peekFirst();
     }
      
     // returns true if the object obj is in the stack,
