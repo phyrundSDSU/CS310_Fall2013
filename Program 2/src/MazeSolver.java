@@ -12,6 +12,7 @@ import data_structures.*;
 public class MazeSolver {
 	
 	private MazeGrid grid;
+	private int distance;
 	private Queue<GridCell> queuCell = new Queue<GridCell>();
 	private Stack<GridCell> stackCell = new Stack<GridCell>();
 	
@@ -88,7 +89,94 @@ public class MazeSolver {
 	
 	public boolean move(){
 		
+		int cRow=19;
+		int cCol=19;
+		
+		GridCell workcell = grid.getCell(cRow,cCol);
+		distance = workcell.getDistance();
+		
+		if(distance==-1)
+			return false;
+		
+		stackCell.push(workcell);
+		int workingDistance = distance;
+		
+		while(distance!=0)
+		{
+			
+			GridCell temp=null;
+			workingDistance = Integer.MAX_VALUE;
+			GridCell workingCell = stackCell.iterator().next();
+			stackCell.pop();
+			
+			cRow = workingCell.getX();
+			cCol = workingCell.getY();
+			
+			//top
+			if(grid.isValidMove(grid.getCell(cRow-1,cCol))){
+				temp=grid.getCell(cRow-1,cCol);
+					
+				if(temp.wasVisited()){
+					workingCell = temp;
+					workingDistance = temp.getDistance();
+					stackCell.push(workingCell);
+					//temp.setDistance(-1);
+				}
+			}
+			//down
+			if( grid.isValidMove(grid.getCell(cRow+1,cCol))){
+				temp=grid.getCell(cRow+1,cCol);	
+				
+				if(temp.wasVisited() && workingCell!=null){
+					workingCell = temp.getDistance()<=workingDistance?temp:workingCell;
+					stackCell.push(workingCell);
+				}else{
+					workingCell = temp;
+				}
+				workingDistance = workingCell.getDistance()==-1?workingDistance:workingCell.getDistance();
+				//workingCell.setDistance(-1);
+			}
+			//left
+			if(grid.isValidMove(grid.getCell(cRow,cCol-1))){
+				temp=grid.getCell(cRow,cCol-1);
+				
+				if(temp.wasVisited() && workingCell!=null){
+					workingCell = temp.getDistance()<=workingDistance?temp:workingCell;
+					stackCell.push(workingCell);
+				}else{
+					workingCell = temp;
+				}
+				workingDistance = workingCell.getDistance()==-1?workingDistance:workingCell.getDistance();
 
+				//workingCell.setDistance(-1);
+			}
+			//right
+			if( grid.isValidMove(grid.getCell(cRow,cCol+1))){
+				temp=grid.getCell(cRow,cCol+1);
+				
+				if(temp.wasVisited() && workingCell!=null){
+					workingCell = temp.getDistance()<=workingDistance?temp:workingCell;
+					stackCell.push(workingCell);
+				}else{
+					workingCell = temp;
+				}
+				workingDistance = workingCell.getDistance()==-1?workingDistance:workingCell.getDistance();
+				//workingCell.setDistance(-1);
+				
+			}
+			distance = workingDistance;
+			if(distance!=-1)
+				stackCell.push(workingCell);
+		}
+		
+		while(!stackCell.isEmpty()){
+			
+			GridCell tmpCell = stackCell.peek();
+			grid.markMove(tmpCell);
+			stackCell.pop();
+			
+
+		}
 		/*distance = terminal_cell.getDistance();
 		if(distance == -1) return false;  // unreachable, puzzle has no solution
 		push terminal cell onto the stack
@@ -99,7 +187,12 @@ public class MazeSolver {
 		while( stack is not empty ) {
 		    pop grid cell off the stack and mark it
 		    }*/
-		return false;
+		
+		
+		
+		
+		
+		return true;
 	}
 	
 	public void reset(){
